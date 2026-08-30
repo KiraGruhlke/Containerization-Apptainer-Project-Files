@@ -1,0 +1,19 @@
+Bootstrap: docker
+From: debian:trixie
+
+%files
+    /home/kira/Dokumente/GPU-Test /opt/gpu_test
+
+%post
+    apt-get update && apt-get install -y wget ca-certificates
+    wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O /tmp/miniforge.sh
+    bash /tmp/miniforge.sh -b -p /opt/conda
+    rm /tmp/miniforge.sh
+    /opt/conda/bin/mamba create -y -n torch_test python=3.11
+    /opt/conda/envs/torch_test/bin/pip install torch --index-url https://download.pytorch.org/whl/cu121
+
+%environment
+    export PATH=/opt/conda/envs/torch_test/bin:$PATH
+
+%runscript
+    exec /opt/conda/envs/torch_test/bin/python "$@"

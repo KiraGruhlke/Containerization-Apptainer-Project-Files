@@ -1,0 +1,19 @@
+Bootstrap: docker
+From: debian:trixie
+
+%post
+  apt-get update && apt-get install -y git wget ca-certificates
+  wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O /tmp/miniforge.sh
+  bash /tmp/miniforge.sh -b -p /opt/conda
+  rm /tmp/miniforge.sh
+  git clone https://github.com/KiraGruhlke/spacemed.git /opt/spacemed
+  cd /opt/spacemed
+  /opt/conda/bin/mamba env create -f spacemed.yml
+  /opt/conda/envs/spacemed26/bin/pip install /opt/spacemed
+  rm -rf /opt/spacemed/build
+
+%environment
+  export PATH=/opt/conda/envs/spacemed26/bin:$PATH
+
+%runscript
+    exec /opt/conda/envs/spacemed26/bin/python "$@"
