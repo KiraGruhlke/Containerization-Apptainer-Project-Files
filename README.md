@@ -9,4 +9,4 @@ Enthaltene Teile sind:
 4. `gpu-unterstuetzung.md` (in `~/Apptainer/gpu_test`)
 Dies sind kurze Markdown-Anleitungen.
 
-Weitergehende technische Hintergründe und Erklärungen finden sich `Technical Report to Containerization with Apptainer.pdf` (in `~/Apptainer`).
+Weitergehende technische Hintergründe und Erklärungen finden sich `Technical Report to Containerization with Apptainer.pdf` (in diesem Verzeichnis).
